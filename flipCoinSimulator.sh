@@ -75,13 +75,12 @@ do
 
 	if [ $count_heads -eq 21 ]
 	then
-		echo "Heads occured $count_heads times"
-		echo "Tails occured $count_tails times"
 		break
 	elif [ $count_tails -eq 21 ]
         then
-		echo "Heads occured $count_heads times"
-                echo "Tails occured $count_tails times"
 		break
 	fi
 done
+
+echo "Heads occured $count_heads times"
+echo "Tails occured $count_tails times"
