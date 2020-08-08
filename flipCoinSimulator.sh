@@ -103,32 +103,52 @@ win_diff=0
 
 for((i=1;i<=40;i++))
 do
-        flip_check=$((RANDOM%2))
+        flip_check_1=$((RANDOM%2))
 
-        if [ $flip_check -eq $isHeads ]
+        if [ $flip_check_1 -eq $isHeads ]
         then
                 count_heads=$((count_heads + 1))
-        elif [ $flip_check -eq $isTails ]
+        elif [ $flip_check_1 -eq $isTails ]
         then
                 count_tails=$((count_tails + 1))
         fi
 
        	if [ $count_heads -eq 21 ]
        	then
-               	while [ $win_diff -ne 2 ]
-		do
-			count_tails=$((count_tails + 1))
-			win_diff=$((count_heads-count_tails))
-		done
-		break
+              break
        	elif [ $count_tails -eq 21 ]
        	then
-                while [ $win_diff -ne 2 ]
-                do
-                        count_heads=$((count_heads + 1))
-			win_diff=$((count_tails-count_heads))
-		done
 		break
+	elif [[ $count_heads -eq 20 && $count_tails -eq 20 ]]
+	then
+		flip_check_2=$((RANDOM%2))
+
+		if [ $flip_check_2 -eq $isHeads ]
+        	then
+                	count_heads=$((count_heads + 1))
+			win_diff_heads=$((count_heads-count_tails))
+			while [ $win_diff_heads -ne 2 ]
+			do
+                        	count_heads=$((count_heads + 1))
+				win_diff_heads=$((count_heads-count_tails))
+			done
+
+        	elif [ $flip_check_2 -eq $isTails ]
+        	then
+                	count_tails=$((count_tails + 1))
+			win_diff_tails=$((count_tails-count_heads))
+
+			while [ $win_diff_tails -ne 2 ]
+			do
+                        	count_tails=$((count_tails + 1))
+                        	win_diff_tails=$((count_tails-count_heads))
+			done	
+        	fi
+
+		if [[  $win_diff_heads -eq 2 || $win_diff_heads -eq 2 ]]
+		then
+			break
+		fi
         fi
 done
 
