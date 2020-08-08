@@ -152,5 +152,6 @@ do
         fi
 done
 
+
 echo "Heads occured $count_heads times"
 echo "Tails occured $count_tails times"
